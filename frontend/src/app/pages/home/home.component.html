@@ -1,204 +1,201 @@
 <!-- Navbar -->
-<nav class="flex justify-between items-center py-4 px-8 border-b">
+<nav class="flex justify-between items-center py-4 px-8 border-b border-gray-600 bg-gray-800">
   <div class="flex gap-8">
-    <!-- <a routerLink="/" class="font-semibold border-b-2 border-red-600 pb-1">Hire a Car</a>
-    <a routerLink="/lose-my-car" class="font-semibold">Lease my Car</a> -->
-    <a routerLink="/about" class="font-semibold">About Us</a>
-    <!-- <a routerLink="/carwash" class="font-semibold">Carwash Services</a> -->
+    <a routerLink="/our-heritage" class="font-semibold text-lime-400 hover:text-white transition-colors">Our Heritage</a>
   </div>
-  <!-- <div>
-    <img src="assets/logo.png" alt="Logo" class="h-16" />
-  </div> -->
+  <div class="text-center">
+    <h1 class="text-2xl font-bold text-lime-400">PRESTIGE MOTORS</h1>
+    <p class="text-xs text-gray-400 uppercase tracking-wider">Luxury Redefined</p>
+  </div>
   <div class="flex gap-8">
-    <!-- <a routerLink="/terms" class="font-semibold">Terms & Conditions</a>
-    <a routerLink="/invest" class="font-semibold">Invest</a> -->
-    <a routerLink="/contact" class="font-semibold">Contact Us</a>
-    <!-- <a routerLink="/location" class="font-semibold">Our Location</a> -->
+    <a routerLink="/reach-us" class="font-semibold text-lime-400 hover:text-white transition-colors">Reach Us</a>
   </div>
 </nav>
 
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden">
-  <div class="absolute inset-0 bg-black opacity-10"></div>
-  <div class="relative container-max section-padding">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
+<section class="relative bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden min-h-screen">
+  <div class="absolute inset-0 bg-black opacity-20"></div>
+  <div class="relative max-w-7xl mx-auto px-8 py-16">
+    <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
       <!-- Hero Content -->
       <div class="animate-fade-in-up">
-        <div class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-6">
+        <div class="inline-flex items-center px-4 py-2 bg-lime-400/20 text-lime-400 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
           <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
           </svg>
-          Trusted by 10,000+ customers
+          Distinguished by 20,000+ connoisseurs
         </div>
         
-        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-          Find Your Perfect
-          <span class="text-blue-600">Ride</span>
-          Today
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          Experience
+          <span class="text-lime-400">Automotive</span>
+          Mastery
         </h1>
         
-        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-          Choose from our premium fleet of vehicles. From economy to luxury, we have the perfect car for every journey. Book online and save up to 30%.
+        <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+          Indulge in our meticulously curated fleet of distinguished automobiles. From executive elegance to performance prowess, every journey becomes extraordinary.
         </p>
         
         <!-- Search Form -->
         <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
           <div class="grid md:grid-cols-3 gap-8">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Vehicle Type</label>
-              <select [(ngModel)]="selectedVehicleType" class="input-field">
-                <option value="">All Types</option>
-                <option value="economy">Economy</option>
-                <option value="compact">Compact</option>
-                <option value="suv">SUV</option>
-                <option value="luxury">Luxury</option>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Automobile Class</label>
+              <select [(ngModel)]="selectedVehicleType" class="w-full p-3 border border-gray-300 rounded-lg text-gray-800 bg-white focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 outline-none transition-all">
+                <option value="">All Classifications</option>
+                <option value="executive">Executive Luxury</option>
+                <option value="performance">Performance Elite</option>
+                <option value="prestige">Prestige Collection</option>
+                <option value="ultra">Ultra Premium</option>
               </select>
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Search Term</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Search Parameters</label>
               <input 
                 type="text" 
                 [(ngModel)]="searchTerm"
-                placeholder="Search by brand, model..."
-                class="input-field"
+                placeholder="Marque, model, specifications..."
+                class="w-full p-3 border border-gray-300 rounded-lg text-gray-800 bg-white focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 outline-none transition-all"
               >
             </div>
             <div class="flex items-end">
-              <button (click)="searchVehicles()" class="btn-primary w-full">
+              <button (click)="searchVehicles()" class="w-full bg-lime-400 hover:bg-lime-500 text-gray-900 font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                Search Cars
+                Discover Collection
               </button>
             </div>
           </div>
         </div>
         
         <!-- Trust Indicators -->
-        <div class="flex items-center space-x-8 text-sm text-gray-600">
+        <div class="flex items-center space-x-8 text-sm text-gray-300">
           <div class="flex items-center">
-            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 text-lime-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
-            No Hidden Fees
+            Transparent Excellence
           </div>
           <div class="flex items-center">
-            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 text-lime-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
-            24/7 Support
+            Elite Concierge
           </div>
           <div class="flex items-center">
-            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 text-lime-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
-            Free Cancellation
+            Flexible Reservations
           </div>
         </div>
       </div>
       
-      <!-- Hero Image -->
+      <!-- Hero Image with Animation -->
       <div class="relative">
-        <div class="relative z-10">
-          <img src="https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg" alt="Luxury Car" class="rounded-2xl shadow-2xl">
+        <div class="relative z-10 animate-pulse">
+          <img src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg" alt="Premium Luxury Vehicle" class="rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-700">
         </div>
-        <div class="absolute -top-4 -right-4 w-72 h-72 bg-blue-200 rounded-full opacity-20"></div>
-        <div class="absolute -bottom-4 -left-4 w-48 h-48 bg-yellow-200 rounded-full opacity-20"></div>
+        <div class="absolute -top-4 -right-4 w-72 h-72 bg-lime-400/20 rounded-full opacity-30 animate-ping"></div>
+        <div class="absolute -bottom-4 -left-4 w-48 h-48 bg-blue-400/20 rounded-full opacity-30 animate-bounce"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Login Reminder Banner -->
-<div *ngIf="!authService.isAuthenticated()" class="bg-blue-50 border-b border-blue-200">
-  <div class="container-max py-4">
+<!-- Authentication Reminder Banner -->
+<div *ngIf="!authService.isAuthenticated()" class="bg-lime-400/10 border-b border-lime-400/20">
+  <div class="max-w-7xl mx-auto py-4 px-8">
     <div class="flex items-center justify-center text-center">
-      <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-5 h-5 text-lime-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
       </svg>
-      <p class="text-blue-700">
-        <span class="font-medium">Browse and view vehicle details freely!</span> 
-        <span class="font-medium">Login or create an account</span> to book vehicles and manage your rentals
+      <p class="text-gray-200">
+        <span class="font-medium">Explore our distinguished collection unrestricted!</span> 
+        <span class="font-medium text-lime-400">Access your account or register</span> to secure reservations and unlock premium member privileges
       </p>
-      <a routerLink="/login" class="ml-4 text-blue-600 hover:text-blue-800 font-medium underline">
-        Login Now
+      <a routerLink="/authenticate" class="ml-4 text-lime-400 hover:text-white font-medium underline transition-colors">
+        Member Access
       </a>
     </div>
   </div>
 </div>
 
-<!-- Features Section -->
-<section class="section-padding bg-white">
-  <div class="container-max">
+<!-- Distinguished Features Section -->
+<section class="py-20 bg-gray-800">
+  <div class="max-w-7xl mx-auto px-8">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Us</h2>
-      <p class="text-xl text-gray-600 max-w-2xl mx-auto">We provide the best car rental experience with premium vehicles, competitive prices, and exceptional customer service.</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Distinguished Excellence</h2>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">We deliver unparalleled automotive experiences through meticulous attention to detail, premium service standards, and unwavering commitment to luxury.</p>
     </div>
     
     <div class="grid md:grid-cols-3 gap-8">
       <!-- Feature 1 -->
       <div class="text-center">
-        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <div class="w-16 h-16 bg-lime-400/20 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
+          <svg class="w-8 h-8 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
           </svg>
         </div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Premium Fleet</h3>
-        <p class="text-gray-600">Choose from our carefully maintained fleet of vehicles, from economy to luxury models.</p>
+        <h3 class="text-xl font-semibold text-white mb-4">Curated Magnificence</h3>
+        <p class="text-gray-300">Handpicked from the world's most prestigious automotive manufacturers, each vehicle represents the pinnacle of engineering excellence.</p>
       </div>
       
       <!-- Feature 2 -->
       <div class="text-center">
-        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="w-16 h-16 bg-lime-400/20 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
+          <svg class="w-8 h-8 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
           </svg>
         </div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Best Prices</h3>
-        <p class="text-gray-600">Competitive rates with no hidden fees. Get the best value for your money.</p>
+        <h3 class="text-xl font-semibold text-white mb-4">Premium Investment</h3>
+        <p class="text-gray-300">Exceptional value proposition with transparent pricing structure. Experience luxury without compromise at competitive market rates.</p>
       </div>
       
       <!-- Feature 3 -->
       <div class="text-center">
-        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 109.75 9.75A9.75 9.75 0 0012 2.25z"></path>
+        <div class="w-16 h-16 bg-lime-400/20 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
+          <svg class="w-8 h-8 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
           </svg>
         </div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">24/7 Support</h3>
-        <p class="text-gray-600">Round-the-clock customer support to assist you with any questions or issues.</p>
+        <h3 class="text-xl font-semibold text-white mb-4">Exclusive Assistance</h3>
+        <p class="text-gray-300">Dedicated specialists available continuously to ensure your luxury experience surpasses expectations with personalized attention.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Popular Vehicles Section -->
-<section class="section-padding bg-gray-50">
-  <div class="container-max">
+<!-- Signature Collection Section -->
+<section class="py-20 bg-gray-900">
+  <div class="max-w-7xl mx-auto px-8">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Vehicles</h2>
-      <p class="text-xl text-gray-600">Explore our most popular rental vehicles</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Signature Collection</h2>
+      <p class="text-xl text-gray-300">Discover our most coveted luxury automobiles</p>
     </div>
     
     <!-- Loading State -->
     <div *ngIf="isLoadingVehicles" class="text-center py-12">
-      <div class="spinner mx-auto mb-4"></div>
-      <p class="text-gray-600">Loading popular vehicles...</p>
+      <div class="w-12 h-12 border-4 border-gray-600 border-t-lime-400 rounded-full animate-spin mx-auto mb-4"></div>
+      <p class="text-gray-300">Curating distinguished vehicles...</p>
     </div>
     
     <!-- Vehicles Grid -->
     <div *ngIf="!isLoadingVehicles && popularVehicles.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div *ngFor="let vehicle of popularVehicles" class="card overflow-hidden group">
+      <div *ngFor="let vehicle of popularVehicles" class="bg-white rounded-2xl shadow-2xl overflow-hidden group hover:transform hover:scale-105 transition-all duration-300">
         <div class="relative overflow-hidden">
-          <img [src]="getVehicleImage(vehicle)" [alt]="vehicle.name" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+          <img [src]="getVehicleImage(vehicle)" [alt]="vehicle.name" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
           <div class="absolute top-4 right-4">
-            <span *ngIf="isVehiclePopular(vehicle)" class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-              Popular
+            <span *ngIf="isVehiclePopular(vehicle)" class="bg-lime-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wide">
+              Distinguished
             </span>
-            <span *ngIf="isVehicleNew(vehicle)" class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-              New
+            <span *ngIf="isVehicleNew(vehicle)" class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wide">
+              Premier
             </span>
           </div>
+          <!-- Luxury Car Animation Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
         <div class="p-6">
           <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ vehicle.name }}</h3>
@@ -209,50 +206,49 @@
                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                {{ vehicle.category }} Category
+                {{ vehicle.category }} Classification
               </span>
               <span class="flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                {{ vehicle.color }} Color
+                {{ vehicle.color }} Finish
               </span>
             </div>
-            <div class="text-2xl font-bold text-blue-600">${{ vehicle.pricePerDay }}/day</div>
+            <div class="text-2xl font-bold text-lime-400">${{ vehicle.pricePerDay }}/day</div>
           </div>
           
           <!-- Action Buttons -->
           <div class="space-y-3">
             <!-- View Details Button -->
             <a 
-              [routerLink]="['/car', vehicle.id]"
-              class="btn-secondary w-full text-center block"
+              [routerLink]="['/automobile', vehicle.id]"
+              class="w-full block text-center border-2 border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-gray-900 font-semibold py-2 px-4 rounded-lg transition-all duration-300"
             >
               <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
               </svg>
-              View Details
+              Explore Specifications
             </a>
             
-            <!-- Book Now Button -->
+            <!-- Reserve Now Button -->
             <button 
               (click)="bookVehicle(vehicle.id)" 
               [disabled]="!isVehicleAvailable(vehicle)"
-              class="btn-primary w-full"
-              [ngClass]="{'opacity-50 cursor-not-allowed': !isVehicleAvailable(vehicle)}"
+              class="w-full bg-lime-400 hover:bg-lime-500 text-gray-900 font-semibold py-2 px-4 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {{ isVehicleAvailable(vehicle) ? 'Book Now' : 'Unavailable' }}
+              {{ isVehicleAvailable(vehicle) ? 'Reserve Now' : 'Currently Reserved' }}
             </button>
             
-            <!-- Login reminder for non-authenticated users -->
+            <!-- Authentication reminder for non-authenticated users -->
             <div *ngIf="!authService.isAuthenticated() && isVehicleAvailable(vehicle)" 
-                 class="bg-blue-50 border border-blue-200 rounded-lg p-2 text-center">
-              <p class="text-xs text-blue-700">
+                 class="bg-lime-400/10 border border-lime-400/20 rounded-lg p-2 text-center">
+              <p class="text-xs text-lime-400">
                 <svg class="w-3 h-3 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                View details first, then login to book
+                Explore details first, then authenticate to reserve
               </p>
             </div>
           </div>
@@ -262,16 +258,16 @@
     
     <!-- No Vehicles State -->
     <div *ngIf="!isLoadingVehicles && popularVehicles.length === 0" class="text-center py-12">
-      <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-16 h-16 text-gray-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33"></path>
       </svg>
-      <h3 class="text-lg font-medium text-gray-900 mb-2">No vehicles available</h3>
-      <p class="text-gray-600">Check back later for our latest vehicles</p>
+      <h3 class="text-lg font-medium text-white mb-2">Collection temporarily unavailable</h3>
+      <p class="text-gray-400">Our curators are updating the distinguished selection</p>
     </div>
     
     <div class="text-center mt-12">
-      <a routerLink="/vehicles" class="btn-secondary">
-        View All Vehicles
+      <a routerLink="/collection" class="inline-flex items-center border-2 border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-gray-900 font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+        Explore Complete Collection
         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
         </svg>
@@ -280,37 +276,57 @@
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section-padding bg-blue-600">
-  <div class="container-max text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-      {{ authService.isAuthenticated() ? 'Ready to Start Your Journey?' : 'Ready to Book Your Perfect Ride?' }}
+<!-- Premium CTA Section -->
+<section class="py-20 bg-lime-400">
+  <div class="max-w-7xl mx-auto px-8 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+      {{ authService.isAuthenticated() ? 'Ready to Embark on Excellence?' : 'Prepared to Experience Automotive Luxury?' }}
     </h2>
-    <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+    <p class="text-xl text-gray-800 mb-8 max-w-2xl mx-auto">
       {{ authService.isAuthenticated() 
-        ? 'Join thousands of satisfied customers who trust us for their car rental needs.' 
-        : 'Browse and view vehicle details freely. Create an account or login to start booking vehicles and manage your rentals.' }}
+        ? 'Join our distinguished clientele who demand nothing less than automotive perfection for their journeys.' 
+        : 'Explore and examine vehicle specifications without restriction. Register or authenticate to begin securing reservations and accessing exclusive member benefits.' }}
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a *ngIf="!authService.isAuthenticated()" routerLink="/register" class="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
-        Get Started Today
+      <a *ngIf="!authService.isAuthenticated()" routerLink="/register" class="bg-gray-900 text-lime-400 hover:bg-gray-800 font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+        Begin Your Journey
       </a>
-      <a *ngIf="!authService.isAuthenticated()" routerLink="/login" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
-        Login Now
+      <a *ngIf="!authService.isAuthenticated()" routerLink="/authenticate" class="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-lime-400 font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+        Member Access
       </a>
-      <a *ngIf="authService.isAuthenticated()" routerLink="/vehicles" class="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
-        Browse Vehicles
+      <a *ngIf="authService.isAuthenticated()" routerLink="/collection" class="bg-gray-900 text-lime-400 hover:bg-gray-800 font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+        Browse Collection
       </a>
-      <a routerLink="/contact" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
-        Contact Us
+      <a routerLink="/reach-us" class="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-lime-400 font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+        Connect With Us
       </a>
     </div>
   </div>
 </section>
 
-<!-- Social Sidebar -->
+<!-- Second Luxury Car Animation -->
+<section class="py-16 bg-gray-800">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="relative">
+        <div class="animate-pulse">
+          <img src="https://images.pexels.com/photos/1719648/pexels-photo-1719648.jpeg" alt="Elite Luxury SUV" class="rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="absolute -top-6 -left-6 w-32 h-32 bg-lime-400/20 rounded-full animate-bounce opacity-50"></div>
+      </div>
+      <div class="text-white">
+        <h3 class="text-3xl font-bold mb-6">Unparalleled Luxury Experience</h3>
+        <p class="text-gray-300 text-lg leading-relaxed">
+          Every vehicle in our distinguished collection represents the epitome of automotive craftsmanship. From handcrafted interiors to precision-engineered performance, experience the difference that true luxury makes.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Media Sidebar -->
 <div class="fixed right-4 top-1/3 flex flex-col gap-4 z-50">
-  <a href="#"><i class="fab fa-facebook fa-2x text-blue-600"></i></a>
-  <a href="#"><i class="fab fa-instagram fa-2x text-pink-500"></i></a>
-  <a href="#"><i class="fab fa-tiktok fa-2x text-black"></i></a>
+  <a href="#" class="text-lime-400 hover:text-white transition-colors"><i class="fab fa-facebook fa-2x"></i></a>
+  <a href="#" class="text-lime-400 hover:text-white transition-colors"><i class="fab fa-instagram fa-2x"></i></a>
+  <a href="#" class="text-lime-400 hover:text-white transition-colors"><i class="fab fa-twitter fa-2x"></i></a>
 </div>
