@@ -9,11 +9,11 @@ POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-  "email": "kimutaibrian923@gmail.com",
-  "password": "admin123456",
-  "firstName": "Brian",
-  "lastName": "agent",
-  "role": "AGENT"
+  "email": "claudebrilliant@gmail.com",
+  "password": "admin1234",
+  "firstName": "Clide",
+  "lastName": "Brill",
+  "role": "CUSTOMER"
 }
 
 
@@ -23,8 +23,8 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "kimutaibrian922@gmail.com",
-  "password": "admin123456"
+  "email": "claudebrilliant@gmail.com",
+  "password": "admin1234"
 }
 
 

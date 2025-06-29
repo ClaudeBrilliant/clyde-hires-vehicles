@@ -1,9 +1,8 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable prettier/prettier */
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { Body, ConflictException, Controller, InternalServerErrorException, NotFoundException, Param, Post, Put, Query } from '@nestjs/common';
@@ -11,7 +10,6 @@ import { UsersService } from './users.service';
 import { User } from './interface/user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiResponse } from './shared/ApiResponse/api-response.interface';
-import { Role } from 'generated/prisma/client';
 import * as bcrypt from 'bcrypt';
 import { UpdateUserDto } from './dto/upadate-user.dto';
 

@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+ 
 import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Role } from 'generated/prisma/client';
+import { Role } from '@prisma/client';
 import { ROLES_KEY } from 'src/common/decorators/roles.decorator';
 
 @Injectable()

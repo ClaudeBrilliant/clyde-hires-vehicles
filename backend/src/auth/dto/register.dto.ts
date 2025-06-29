@@ -1,10 +1,8 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-wrapper-object-types */
-/* eslint-disable prettier/prettier */
+
 /* eslint-disable prettier/prettier */
 import { IsEmail, IsNotEmpty, IsString, MinLength, IsOptional, IsEnum, IsPhoneNumber } from 'class-validator';
-import { Role } from 'generated/prisma/client';
-
+import { Role } from '@prisma/client';
 
 export class RegisterDto {
   @IsEmail()

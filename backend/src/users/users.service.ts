@@ -1,17 +1,14 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 /* eslint-disable prettier/prettier */
 import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './interface/user.interface';
 import * as bcrypt from 'bcrypt';
-import { Role } from 'generated/prisma/client';
 import { UpdateUserDto } from './dto/upadate-user.dto';
+import { Role } from '@prisma/client';
 @Injectable()
 export class UsersService {
     user: any;
@@ -144,7 +141,7 @@ export class UsersService {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
+   
   async findById(id: string) {
     return this.prismaservice.user.findUnique({
       where: { id },
