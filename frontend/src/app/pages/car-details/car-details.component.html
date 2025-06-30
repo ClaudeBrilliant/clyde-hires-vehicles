@@ -1,158 +1,274 @@
 <!-- Loading State -->
-<div *ngIf="isLoading" class="container-max py-12">
-  <div class="text-center">
-    <div class="spinner mx-auto mb-4"></div>
-    <p class="text-gray-600">Loading vehicle details...</p>
+<div *ngIf="isLoading" class="bg-gray-800 min-h-screen py-16">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-700 rounded-full animate-spin mb-6">
+      <div class="w-8 h-8 border-4 border-lime-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+    <p class="text-gray-300 text-lg">Loading vehicle details...</p>
   </div>
 </div>
 
 <!-- Error State -->
-<div *ngIf="errorMessage && !isLoading" class="container-max py-12">
-  <div class="text-center">
-    <svg class="w-16 h-16 text-red-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-    </svg>
-    <h3 class="text-lg font-medium text-gray-900 mb-2">Error Loading Vehicle</h3>
-    <p class="text-gray-600 mb-4">{{ errorMessage }}</p>
-    <button (click)="loadVehicle(vehicle?.id || '')" class="btn-primary">
-      Try Again
-    </button>
+<div *ngIf="errorMessage && !isLoading" class="bg-gray-800 min-h-screen py-16">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <div class="bg-gray-700 rounded-2xl p-12 max-w-md mx-auto">
+      <div class="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+        </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-white mb-4">Unable to Load Vehicle</h3>
+      <p class="text-gray-300 mb-8 leading-relaxed">{{ errorMessage }}</p>
+      <button 
+        (click)="loadVehicle(vehicle?.id || '')" 
+        class="bg-lime-500 hover:bg-lime-600 text-gray-900 font-semibold px-8 py-3 rounded-xl transition-all duration-200 transform hover:scale-105"
+      >
+        Retry Loading
+      </button>
+    </div>
   </div>
 </div>
 
 <!-- Vehicle Details -->
-<div *ngIf="vehicle && !isLoading" class="container-max py-8">
-  <!-- Breadcrumb -->
-  <nav class="mb-8">
-    <ol class="flex items-center space-x-2 text-sm text-gray-600">
-      <li><a routerLink="/" class="hover:text-blue-600">Home</a></li>
-      <li><span class="mx-2">/</span></li>
-      <li><a routerLink="/vehicles" class="hover:text-blue-600">Vehicles</a></li>
-      <li><span class="mx-2">/</span></li>
-      <li class="text-gray-900">{{ vehicle.name }}</li>
-    </ol>
+<div *ngIf="vehicle && !isLoading" class="bg-gray-800 min-h-screen">
+  <!-- Navigation Bar -->
+  <nav class="bg-gray-900 border-b border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center space-x-3 text-sm">
+        <a routerLink="/" class="text-gray-400 hover:text-lime-500 transition-colors duration-200">Home</a>
+        <svg class="w-4 h-4 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"></path>
+        </svg>
+        <a routerLink="/vehicles" class="text-gray-400 hover:text-lime-500 transition-colors duration-200">Vehicles</a>
+        <svg class="w-4 h-4 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"></path>
+        </svg>
+        <span class="text-white font-medium">{{ vehicle.name }}</span>
+      </div>
+    </div>
   </nav>
 
-  <div class="grid lg:grid-cols-2 gap-12">
-    <!-- Vehicle Images -->
-    <div>
-      <div class="relative overflow-hidden rounded-2xl mb-4">
-        <img 
-          [src]="getVehicleImage()" 
-          [alt]="vehicle.name" 
-          class="w-full h-96 object-cover"
-        >
-        <div class="absolute top-4 right-4">
-          <span *ngIf="isVehiclePopular(vehicle)" class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-            Popular
-          </span>
-          <span *ngIf="isVehicleNew(vehicle)" class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-            New
-          </span>
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <!-- Main Content Grid -->
+    <div class="grid lg:grid-cols-12 gap-12">
+      <!-- Vehicle Image Section -->
+      <div class="lg:col-span-7">
+        <div class="relative group">
+          <div class="bg-gray-900 rounded-3xl p-8 border border-gray-700">
+            <div class="relative overflow-hidden rounded-2xl bg-gray-800">
+              <img 
+                [src]="getVehicleImage()" 
+                [alt]="vehicle.name" 
+                class="w-full h-96 lg:h-[500px] object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+              
+              <!-- Status Badges -->
+              <div class="absolute top-6 right-6 flex flex-col space-y-2">
+                <span *ngIf="isVehiclePopular(vehicle)" 
+                      class="bg-lime-500 text-gray-900 px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                  🔥 Popular Choice
+                </span>
+                <span *ngIf="isVehicleNew(vehicle)" 
+                      class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                  ✨ New Arrival
+                </span>
+              </div>
+              
+              <div *ngIf="!isVehicleAvailable()" class="absolute top-6 left-6">
+                <span class="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                  ❌ Unavailable
+                </span>
+              </div>
+              
+              <!-- Gradient Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent"></div>
+            </div>
+          </div>
         </div>
-        <div class="absolute top-4 left-4">
-          <span *ngIf="!isVehicleAvailable()" class="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-            Unavailable
-          </span>
+      </div>
+
+      <!-- Vehicle Information Section -->
+      <div class="lg:col-span-5">
+        <div class="bg-gray-900 rounded-3xl p-8 border border-gray-700 h-fit">
+          <!-- Vehicle Header -->
+          <div class="mb-8">
+            <div class="flex items-center space-x-3 mb-4">
+              <div class="w-2 h-8 bg-lime-500 rounded-full"></div>
+              <h1 class="text-4xl font-bold text-white">{{ vehicle.name }}</h1>
+            </div>
+            <p class="text-xl text-gray-300 mb-6">{{ vehicle.make }} {{ vehicle.model }}</p>
+            <div class="inline-block bg-gray-800 px-4 py-2 rounded-xl border border-gray-700">
+              <span class="text-lime-500 font-semibold">{{ vehicle.category }}</span>
+            </div>
+          </div>
+
+          <!-- Pricing Section -->
+          <div class="bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-700">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-lime-500 mb-2">
+                ${{ vehicle.pricePerDay }}
+              </div>
+              <div class="text-gray-400 font-medium">per day</div>
+            </div>
+          </div>
+
+          <!-- Availability Status -->
+          <div class="mb-8">
+            <div class="flex items-center justify-center space-x-3 p-4 rounded-xl" 
+                 [ngClass]="isVehicleAvailable() ? 'bg-lime-500/10 border border-lime-500/20' : 'bg-red-500/10 border border-red-500/20'">
+              <div class="w-3 h-3 rounded-full animate-pulse" 
+                   [ngClass]="isVehicleAvailable() ? 'bg-lime-500' : 'bg-red-500'">
+              </div>
+              <span class="font-semibold" 
+                    [ngClass]="isVehicleAvailable() ? 'text-lime-500' : 'text-red-400'">
+                {{ isVehicleAvailable() ? 'Available for Booking' : 'Currently Unavailable' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Booking Section -->
+          <div class="space-y-4">
+            <button 
+              (click)="bookVehicle()" 
+              [disabled]="!isVehicleAvailable()"
+              class="w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-lime-500/50"
+              [ngClass]="isVehicleAvailable() ? 
+                'bg-lime-500 hover:bg-lime-600 text-gray-900 shadow-lg hover:shadow-lime-500/25' : 
+                'bg-gray-700 text-gray-500 cursor-not-allowed'"
+            >
+              {{ isVehicleAvailable() ? '🚗 Book This Vehicle' : '❌ Currently Unavailable' }}
+            </button>
+            
+            <!-- Authentication Notice -->
+            <div *ngIf="!authService.isAuthenticated() && isVehicleAvailable()" 
+                 class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+              <div class="flex items-center justify-center space-x-2 text-blue-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="text-sm font-medium">Login required to complete booking</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Vehicle Information -->
-    <div>
-      <div class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ vehicle.name }}</h1>
-        <p class="text-xl text-gray-600 mb-4">{{ vehicle.make }} {{ vehicle.model }} - {{ vehicle.category }}</p>
-        
-        <!-- Price -->
-        <div class="text-3xl font-bold text-blue-600 mb-6">
-          ${{ vehicle.pricePerDay }}/day
+    <!-- Vehicle Description -->
+    <div class="mt-16">
+      <div class="bg-gray-900 rounded-3xl p-8 border border-gray-700">
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-2 h-8 bg-lime-500 rounded-full"></div>
+          <h2 class="text-2xl font-bold text-white">Vehicle Overview</h2>
         </div>
+        <p class="text-gray-300 text-lg leading-relaxed">
+          Experience premium driving with this {{ vehicle.category.toLowerCase() }} featuring {{ vehicle.transmission.toLowerCase() }} transmission and {{ vehicle.fuelType.toLowerCase() }} fuel efficiency. Perfect for your transportation needs.
+        </p>
+      </div>
+    </div>
 
-        <!-- Availability Status -->
-        <div class="mb-6">
-          <div class="flex items-center space-x-2">
-            <div class="w-3 h-3 rounded-full" [ngClass]="isVehicleAvailable() ? 'bg-green-500' : 'bg-red-500'"></div>
-            <span class="text-sm font-medium" [ngClass]="isVehicleAvailable() ? 'text-green-600' : 'text-red-600'">
-              {{ isVehicleAvailable() ? 'Available for booking' : 'Currently unavailable' }}
-            </span>
-          </div>
-        </div>
-
-        <!-- Book Button -->
-        <div class="mb-6">
-          <button 
-            (click)="bookVehicle()" 
-            [disabled]="!isVehicleAvailable()"
-            class="w-full btn-primary text-lg py-4 mb-3"
-            [ngClass]="{'opacity-50 cursor-not-allowed': !isVehicleAvailable()}"
-          >
-            {{ isVehicleAvailable() ? 'Book This Vehicle' : 'Currently Unavailable' }}
-          </button>
-          
-          <!-- Login reminder for non-authenticated users -->
-          <div *ngIf="!authService.isAuthenticated() && isVehicleAvailable()" 
-               class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
-            <p class="text-sm text-blue-700">
-              <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <!-- Detailed Specifications -->
+    <div class="mt-16">
+      <div class="flex items-center space-x-3 mb-8">
+        <div class="w-2 h-8 bg-lime-500 rounded-full"></div>
+        <h2 class="text-3xl font-bold text-white">Vehicle Specifications</h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Basic Information Card -->
+        <div class="bg-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-lime-500/30 transition-all duration-300">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-10 h-10 bg-lime-500/20 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              You'll need to login or create an account to book this vehicle
-            </p>
+            </div>
+            <h3 class="text-xl font-bold text-white">Basic Information</h3>
+          </div>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+              <span class="text-gray-400">Make</span>
+              <span class="text-white font-semibold">{{ vehicle.make }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+              <span class="text-gray-400">Model</span>
+              <span class="text-white font-semibold">{{ vehicle.model }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+              <span class="text-gray-400">Category</span>
+              <span class="text-lime-500 font-semibold">{{ vehicle.category }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <span class="text-gray-400">Color</span>
+              <span class="text-white font-semibold">{{ vehicle.color }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing & Availability Card -->
+        <div class="bg-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-lime-500/30 transition-all duration-300">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-10 h-10 bg-lime-500/20 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white">Pricing & Inventory</h3>
+          </div>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+              <span class="text-gray-400">Daily Rate</span>
+              <span class="text-lime-500 font-bold">${{ vehicle.pricePerDay }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+              <span class="text-gray-400">Available Units</span>
+              <span class="text-white font-semibold">{{ vehicle.total }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <span class="text-gray-400">Mileage</span>
+              <span class="text-white font-semibold">{{ vehicle.mileage }} km</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Specifications Card -->
+        <div class="bg-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-lime-500/30 transition-all duration-300 md:col-span-2 lg:col-span-1">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-10 h-10 bg-lime-500/20 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white">Technical Details</h3>
+          </div>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+              <span class="text-gray-400">Transmission</span>
+              <span class="text-white font-semibold">{{ vehicle.transmission }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+              <span class="text-gray-400">Fuel Type</span>
+              <span class="text-white font-semibold">{{ vehicle.fuelType }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <span class="text-gray-400">Location</span>
+              <span class="text-white font-semibold">{{ vehicle.city }}, {{ vehicle.postalCode }}</span>
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Vehicle Description -->
-      <div class="border-t pt-6">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">Description</h3>
-        <p class="text-gray-700">{{ vehicle.category }} - {{ vehicle.transmission }} transmission, {{ vehicle.fuelType }} fuel</p>
-      </div>
+    <!-- Navigation Footer -->
+    <div class="mt-16 text-center">
+      <a routerLink="/vehicles" 
+         class="inline-flex items-center space-x-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200 transform hover:scale-105 border border-gray-600 hover:border-lime-500/50">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <span>Browse All Vehicles</span>
+      </a>
     </div>
   </div>
-
-  <!-- Detailed Information -->
-  <div class="mt-12 border-t pt-8">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">Vehicle Details</h2>
-    
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-gray-50 p-6 rounded-lg">
-        <h3 class="font-semibold text-gray-900 mb-2">Basic Information</h3>
-        <div class="space-y-2 text-sm text-gray-600">
-          <div><span class="font-medium">Make:</span> {{ vehicle.make }}</div>
-          <div><span class="font-medium">Model:</span> {{ vehicle.model }}</div>
-          <div><span class="font-medium">Category:</span> {{ vehicle.category }}</div>
-          <div><span class="font-medium">Color:</span> {{ vehicle.color }}</div>
-        </div>
-      </div>
-
-      <div class="bg-gray-50 p-6 rounded-lg">
-        <h3 class="font-semibold text-gray-900 mb-2">Pricing & Availability</h3>
-        <div class="space-y-2 text-sm text-gray-600">
-          <div><span class="font-medium">Daily Rate:</span> ${{ vehicle.pricePerDay }}</div>
-          <div><span class="font-medium">Available Units:</span> {{ vehicle.total }}</div>
-          <div><span class="font-medium">Mileage:</span> {{ vehicle.mileage }} km</div>
-        </div>
-      </div>
-
-      <div class="bg-gray-50 p-6 rounded-lg">
-        <h3 class="font-semibold text-gray-900 mb-2">Specifications</h3>
-        <div class="space-y-2 text-sm text-gray-600">
-          <div><span class="font-medium">Transmission:</span> {{ vehicle.transmission }}</div>
-          <div><span class="font-medium">Fuel Type:</span> {{ vehicle.fuelType }}</div>
-          <div><span class="font-medium">Location:</span> {{ vehicle.city }}, {{ vehicle.postalCode }}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Back to Vehicles -->
-  <div class="mt-12 text-center">
-    <a routerLink="/vehicles" class="btn-secondary">
-      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-      </svg>
-      Back to All Vehicles
-    </a>
-  </div>
-</div> 
+</div>
