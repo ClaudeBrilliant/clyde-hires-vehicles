@@ -41,43 +41,70 @@ enum BookingStatus {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  email     String    @unique
-  password  String
-  firstName String
-  lastName  String
-  phone     String?
-  role      Role      @default(CUSTOMER)
-  isActive  Boolean   @default(true)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  bookings  Booking[]
-  reviews   Review[]
-  carts     Cart[]
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  firstName     String
+  lastName      String
+  phone         String?
+  role          Role           @default(CUSTOMER)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  bookings      Booking[]
+  reviews       Review[]
+  carts         Cart[]
+  notifications Notification[]
+
+  dateOfBirth     DateTime?
+  address         String?
+  city            String?
+  state           String?
+  country         String?
+  zipCode         String?
+  drivingLicense  String?
+  licenseExpiry   DateTime?
+  profileImageId  String?
+  profileImageUrl String?
 }
 
 model Vehicle {
-  id           String       @id @default(uuid())
-  name         String         @unique
-  make         String
-  model        String
-  category     String
-  transmission Transmission
-  total        Int
-  fuelType     FuelType
-  pricePerDay  Float
-  color        String      
-  mileage      Int
-  images       String
-  address      String
-  city         String
-  postalCode   String
-  isAvailable  Boolean      @default(true)
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  bookingItems BookingItem[]
-  cartItems    CartItem[]
-  reviews      Review[]
+  id                 String              @id @default(uuid())
+  name               String              @unique
+  make               String
+  model              String
+  category           String
+  transmission       Transmission
+  total              Int
+  fuelType           FuelType
+  pricePerDay        Float
+  color              String
+  mileage            Int
+  images             String
+  address            String
+  city               String
+  postalCode         String
+  isAvailable        Boolean             @default(true)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  bookingItems       BookingItem[]
+  cartItems          CartItem[]
+  reviews            Review[]
+  maintenanceRecords MaintenanceRecord[]
+}
+
+model MaintenanceRecord {
+  id          String    @id @default(cuid())
+  vehicleId   String
+  description String
+  cost        Decimal   @db.Decimal(10, 2)
+  serviceDate DateTime
+  nextService DateTime?
+  createdAt   DateTime  @default(now())
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@map("maintenance_records")
 }
 
 model Cart {
@@ -113,26 +140,29 @@ model Booking {
 }
 
 model BookingItem {
-  id         String   @id @default(uuid())
-  booking    Booking  @relation(fields: [bookingId], references: [id])
-  bookingId  String
-  vehicle    Vehicle  @relation(fields: [vehicleId], references: [id])
-  vehicleId  String
-  startDate  DateTime
-  endDate    DateTime
-  price      Float
-  createdAt  DateTime @default(now())
+  id        String   @id @default(uuid())
+  booking   Booking  @relation(fields: [bookingId], references: [id])
+  bookingId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
+  vehicleId String
+  startDate DateTime
+  endDate   DateTime
+  price     Float
+  createdAt DateTime @default(now())
 }
 
 model Review {
-  id        String   @id @default(uuid())
-  rating    Int
-  comment   String?
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
-  vehicleId String
-  createdAt DateTime @default(now())
+  id            String    @id @default(uuid())
+  rating        Int
+  comment       String?
+  user          User      @relation(fields: [userId], references: [id])
+  userId        String
+  vehicle       Vehicle   @relation(fields: [vehicleId], references: [id])
+  vehicleId     String
+  createdAt     DateTime  @default(now())
+  adminResponse String?
+  respondedAt   DateTime?
+  updatedAt     DateTime  @updatedAt
 }
 
 model PasswordReset {
@@ -159,4 +189,48 @@ model ContactMessage {
   updatedAt DateTime @updatedAt
 
   @@map("contact_messages")
+}
+
+model AuditLog {
+  id        String  @id @default(cuid())
+  userId    String?
+  action    String // CREATE, UPDATE, DELETE, LOGIN, etc.
+  entity    String // User, Vehicle, Booking, etc.
+  entityId  String?
+  oldData   Json?
+  newData   Json?
+  ipAddress String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+model Notification {
+  id      String           @id @default(cuid())
+  userId  String
+  type    NotificationType
+  title   String
+  message String
+  isRead  Boolean          @default(false)
+  data    Json? // Additional data for the notification
+
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+enum NotificationType {
+  BOOKING_SUBMITTED // Customer submitted a booking request
+  BOOKING_APPROVED // Admin approved the booking
+  BOOKING_REJECTED // Admin rejected the booking
+  BOOKING_CANCELLED // Booking was cancelled
+  PICKUP_REMINDER // Reminder for vehicle pickup
+  RETURN_REMINDER // Reminder for vehicle return
+  VEHICLE_READY // Vehicle is ready for pickup
+  MAINTENANCE_DUE // Vehicle maintenance due
+  SYSTEM_ALERT // General system alerts
 }
