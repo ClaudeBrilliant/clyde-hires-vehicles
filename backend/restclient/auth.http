@@ -9,11 +9,11 @@ POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-  "email": "claudebrilliant@gmail.com",
+  "email": "claudewandera087@gmail.com",
   "password": "admin1234",
   "firstName": "Clide",
   "lastName": "Brill",
-  "role": "CUSTOMER"
+  "role": "AGENT"
 }
 
 

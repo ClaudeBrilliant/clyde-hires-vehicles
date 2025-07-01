@@ -1,12 +1,12 @@
-### Create a new booking with multiple vehicles
-POST http://localhost:3000/booking
+### Create a booking as GUEST (no auth required)
+POST http://localhost:3000/booking/guest
 Content-Type: application/json
 
 {
-  "userId": "28dd1abc-9dc2-44b0-b0d5-cfa450309f8d",
+  "userId": "426684ac-174c-4a35-8653-e33176248895",
   "vehicles": [
     {
-      "vehicleId": "0f50cfc1-2ece-4d9d-971b-85dbc058d39f",
+      "vehicleId": "010adf15-e6ff-4977-af96-b84c5895a9e6",
       "startDate": "2024-07-01T10:00:00.000Z",
       "endDate": "2024-07-05T10:00:00.000Z",
       "price": 100.0
@@ -14,25 +14,52 @@ Content-Type: application/json
   ],
   "totalPrice": 220.0
 }
-# Replace <USER_ID>, <VEHICLE_ID_1>, and <VEHICLE_ID_2> with actual IDs from your database. 
 
-### Guest booking (no login required)
+### Create a new booking (requires token)
+@admin-token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
 POST http://localhost:3000/booking
 Content-Type: application/json
+Authorization: Bearer {{admin-token}}
 
 {
-  "guestName": "Jane Doe",
-  "guestEmail": "jane.doe@example.com",
-  "guestPhone": "+254712345678",
+  "userId": "426684ac-174c-4a35-8653-e33176248895",
   "vehicles": [
     {
-      "vehicleId": "0f50cfc1-2ece-4d9d-971b-85dbc058d39f",
-      "startDate": "2024-07-10T10:00:00.000Z",
-      "endDate": "2024-07-12T10:00:00.000Z",
-      "price": 80.0
+      "vehicleId": "010adf15-e6ff-4977-af96-b84c5895a9e6",
+      "startDate": "2024-07-01T10:00:00.000Z",
+      "endDate": "2024-07-05T10:00:00.000Z",
+      "price": 100.0
     }
   ],
-  "totalPrice": 80.0
+  "totalPrice": 220.0
 }
 
-# Replace <VEHICLE_ID_1> with an actual vehicle ID from your database. 
+### Get all bookings (ADMIN or AGENT)
+GET http://localhost:3000/booking
+Authorization: Bearer {{admin-token}}
+
+### Get bookings by user
+GET http://localhost:3000/booking/user/426684ac-174c-4a35-8653-e33176248895
+Authorization: Bearer {{admin-token}}
+
+### Get booking by ID
+GET http://localhost:3000/booking/BOOKING_ID_HERE
+Authorization: Bearer {{admin-token}}
+
+### Update booking by ID
+PATCH http://localhost:3000/booking/BOOKING_ID_HERE
+Content-Type: application/json
+Authorization: Bearer {{admin-token}}
+
+{
+  "totalPrice": 250.0
+}
+
+### Cancel a booking
+POST http://localhost:3000/booking/BOOKING_ID_HERE/cancel
+Authorization: Bearer {{admin-token}}
+
+### Delete a booking
+DELETE http://localhost:3000/booking/BOOKING_ID_HERE
+Authorization: Bearer {{admin-token}}
