@@ -12,6 +12,9 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { ContactModule } from './contact/contact.module';
+import { NotificationModule } from './notifications/notifications.module';
+import { ReviewModule } from './reviews/reviews.module';
+import { AuditLogModule } from './audit-logs/audit-logs.module';
 
 @Module({
   imports: [
@@ -24,6 +27,9 @@ import { ContactModule } from './contact/contact.module';
     AuthModule,
     PrismaModule,
     ContactModule,
+    NotificationModule,
+    ReviewModule,
+    AuditLogModule,
   ],
   controllers: [AppController, VehicleController, BookingController],
   providers: [AppService],
