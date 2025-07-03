@@ -1,0 +1,208 @@
+<div class="review-container">
+  <!-- Error Message -->
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    <i class="fas fa-exclamation-circle"></i>
+    {{ error }}
+    <button type="button" class="btn-close" (click)="error = null"></button>
+  </div>
+
+  <!-- Create Review Form -->
+  <div *ngIf="showCreateForm && userId && vehicleId" class="create-review-section">
+    <h4><i class="fas fa-star"></i> Write a Review</h4>
+    
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmitReview()" class="review-form">
+      <!-- Rating Section -->
+      <div class="form-group">
+        <label class="form-label">Rating *</label>
+        <div class="star-rating">
+          <span 
+            *ngFor="let star of stars" 
+            class="star"
+            [class.filled]="isStarFilled(star, reviewForm.get('rating')?.value || 0)"
+            [class.hovered]="hoveredRating >= star"
+            (click)="setRating(star)"
+            (mouseenter)="setHoveredRating(star)"
+            (mouseleave)="resetHoveredRating()">
+            ★
+          </span>
+          <span class="rating-text">{{ getRatingText(reviewForm.get('rating')?.value || 0) }}</span>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="form-group">
+        <label for="title" class="form-label">Title</label>
+        <input 
+          type="text" 
+          id="title"
+          class="form-control" 
+          formControlName="title"
+          placeholder="Give your review a title (optional)">
+      </div>
+
+      <!-- Comment -->
+      <div class="form-group">
+        <label for="comment" class="form-label">Comment *</label>
+        <textarea 
+          id="comment"
+          class="form-control" 
+          formControlName="comment"
+          rows="4"
+          placeholder="Share your experience..."></textarea>
+        <div *ngIf="reviewForm.get('comment')?.invalid && reviewForm.get('comment')?.touched" 
+             class="invalid-feedback">
+          Comment is required
+        </div>
+      </div>
+
+      <!-- Booking ID (optional) -->
+      <div class="form-group">
+        <label for="bookingId" class="form-label">Booking ID</label>
+        <input 
+          type="text" 
+          id="bookingId"
+          class="form-control" 
+          formControlName="bookingId"
+          placeholder="Related booking ID (optional)">
+      </div>
+
+      <button 
+        type="submit" 
+        class="btn btn-primary"
+        [disabled]="reviewForm.invalid">
+        <i class="fas fa-paper-plane"></i>
+        Submit Review
+      </button>
+    </form>
+  </div>
+
+  <!-- Reviews List -->
+  <div class="reviews-section">
+    <div class="reviews-header">
+      <h4>
+        <i class="fas fa-comments"></i>
+        Reviews 
+        <span class="badge badge-secondary">{{ reviews.length }}</span>
+      </h4>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- No Reviews -->
+    <div *ngIf="!loading && reviews.length === 0" class="no-reviews">
+      <i class="fas fa-comment-slash"></i>
+      <p>No reviews yet. Be the first to share your experience!</p>
+    </div>
+
+    <!-- Reviews List -->
+    <div *ngIf="!loading && reviews.length > 0" class="reviews-list">
+      <div *ngFor="let review of reviews" class="review-card">
+        
+        <!-- Review Header -->
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="reviewer-details">
+              <h6 class="reviewer-name">{{ review.user?.name || 'Anonymous User' }}</h6>
+              <small class="review-date">{{ formatDate(review.createdAt) }}</small>
+            </div>
+          </div>
+          
+          <div class="review-rating">
+            <span *ngFor="let filled of getStarArray(review.rating)" 
+                  class="star" 
+                  [class.filled]="filled">★</span>
+            <span class="rating-value">({{ review.rating }}/5)</span>
+          </div>
+        </div>
+
+        <!-- Vehicle Info (if available) -->
+        <div *ngIf="review.vehicle && !vehicleId" class="vehicle-info">
+          <i class="fas fa-car"></i>
+          <small>{{ review.vehicle.make }} {{ review.vehicle.model }} {{ review.vehicle.year }}</small>
+        </div>
+
+        <!-- Review Content -->
+        <div class="review-content">
+          <h6 *ngIf="review.title" class="review-title">{{ review.title }}</h6>
+          <p class="review-comment">{{ review.comment }}</p>
+          
+          <!-- Booking Reference -->
+          <small *ngIf="review.bookingId" class="booking-ref">
+            <i class="fas fa-receipt"></i>
+            Booking: {{ review.bookingId }}
+          </small>
+        </div>
+
+        <!-- Admin Response -->
+        <div *ngIf="review.adminResponse" class="admin-response">
+          <div class="response-header">
+            <i class="fas fa-reply"></i>
+            <strong>Response from Management</strong>
+            <small *ngIf="review.respondedAt">{{ formatDate(review.respondedAt) }}</small>
+          </div>
+          <p>{{ review.adminResponse }}</p>
+        </div>
+
+        <!-- Admin Actions -->
+        <div *ngIf="isAdmin" class="admin-actions">
+          
+          <!-- Respond Button -->
+          <button 
+            *ngIf="!review.adminResponse"
+            class="btn btn-sm btn-outline-primary"
+            (click)="toggleResponseForm(review.id)">
+            <i class="fas fa-reply"></i>
+            Respond
+          </button>
+
+          <!-- Delete Button -->
+          <button 
+            class="btn btn-sm btn-outline-danger"
+            (click)="onDeleteReview(review.id)">
+            <i class="fas fa-trash"></i>
+            Delete
+          </button>
+        </div>
+
+        <!-- Response Form -->
+        <div *ngIf="showResponseForm[review.id]" class="response-form">
+          <form [formGroup]="responseForm" (ngSubmit)="onSubmitResponse(review.id)">
+            <div class="form-group">
+              <label class="form-label">Your Response</label>
+              <textarea 
+                class="form-control" 
+                formControlName="response"
+                rows="3"
+                placeholder="Write your response to this review..."></textarea>
+            </div>
+            <div class="form-actions">
+              <button 
+                type="submit" 
+                class="btn btn-primary btn-sm"
+                [disabled]="responseForm.invalid || submittingResponse[review.id]">
+                <span *ngIf="submittingResponse[review.id]" class="spinner-border spinner-border-sm"></span>
+                <i *ngIf="!submittingResponse[review.id]" class="fas fa-paper-plane"></i>
+                Submit Response
+              </button>
+              <button 
+                type="button" 
+                class="btn btn-secondary btn-sm"
+                (click)="toggleResponseForm(review.id)">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

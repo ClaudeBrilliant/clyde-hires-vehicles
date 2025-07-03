@@ -1,3 +1,4 @@
+import { Review } from './../../../backend/node_modules/.prisma/client/index.d';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -14,12 +15,15 @@ import { PasswordResetComponent } from './pages/password-reset/password-reset.co
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { AuditLogsComponent } from './components/audit-logs/audit-logs.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { ReviewComponent } from './components/reviews/reviews.component';
 
 // Route guard function
 const authGuard = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  
+
   if (authService.isAuthenticated()) {
     return true;
   } else {
@@ -38,9 +42,16 @@ export const routes: Routes = [
   { path: 'vehicles', component: VehiclesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'car/:id', component: CarDetailsComponent },
-  { path: 'booking/:carId', component: BookingComponent, canActivate: [authGuard] },
+  {
+    path: 'booking/:carId',
+    component: BookingComponent,
+    canActivate: [authGuard],
+  },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'agent-dashboard', component: AgentDashboardComponent },
   { path: 'customer-dashboard', component: CustomerDashboardComponent },
   { path: 'password-reset', component: PasswordResetComponent },
+  { path: 'audit-logs', component: AuditLogsComponent },
+  { path: 'reviews', component: ReviewComponent },
+  { path: 'notifications', component: NotificationsComponent },
 ];

@@ -268,7 +268,11 @@ export class CustomerDashboardComponent implements OnInit {
       default: return 'Unknown status';
     }
   }
-
+  
+  logout() {
+    this.authService.logout();
+  }
+  
   getVehicleImage(imageUrl: string): string {
     return imageUrl || 'assets/pexels-mayday-1545743.jpg';
   }

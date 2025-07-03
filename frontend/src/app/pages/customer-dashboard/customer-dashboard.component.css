@@ -92,6 +92,7 @@
   }
 }
 
+
 /* Modal animations */
 .modal-enter {
   animation: modalEnter 0.3s ease-out;

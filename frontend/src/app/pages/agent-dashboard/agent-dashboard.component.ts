@@ -282,6 +282,10 @@ export class AgentDashboardComponent implements OnInit, OnDestroy {
       return 'Invalid Date';
     }
   }
+  
+  logout(){
+    this.authService.logout()
+  }
 
   formatDateTime(date: Date | string): string {
     if (!date) return 'N/A';

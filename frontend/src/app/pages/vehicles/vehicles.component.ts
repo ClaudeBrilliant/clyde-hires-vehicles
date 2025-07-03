@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { VehicleService, Vehicle } from '../../services/vehicle.service';
 import { AuthService } from '../../services/auth.service';
+import { ReviewService } from '../../services/review.service';
+import { ReviewComponent } from "../../components/reviews/reviews.component";
 
 @Component({
   selector: 'app-vehicles',
@@ -25,7 +27,8 @@ export class VehiclesComponent implements OnInit {
   constructor(
     private vehicleService: VehicleService,
     private route: ActivatedRoute,
-    public authService: AuthService
+    public authService: AuthService,
+    private reviews : ReviewService
   ) {}
 
   ngOnInit() {
