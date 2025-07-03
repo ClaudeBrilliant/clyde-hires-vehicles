@@ -3,10 +3,11 @@
 # Variables
 @baseUrl = http://localhost:3000
 @contentType = application/json
-
+@admin-token =
 ### Create Audit Log
 POST {{baseUrl}}/audit-logs
 Content-Type: {{contentType}}
+Authorization: Bearer {{admin-token}}
 
 {
   "userId": "user123",
