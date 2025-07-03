@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 export interface EmailOptions {
   to: string | string[];
   subject: string;

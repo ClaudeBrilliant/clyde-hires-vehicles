@@ -6,6 +6,6 @@ import { MailerModule } from '../mailer/mailer.module';
 @Module({
   imports: [PrismaModule, MailerModule],
   providers: [EmailService],
-  exports: [EmailService]
+  exports: [EmailService],
 })
-export class EmailModule {} 
+export class EmailModule {}
