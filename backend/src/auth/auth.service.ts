@@ -71,14 +71,6 @@ export class AuthService {
       },
     });
 
- 
-    // try {
-    //   await this.emailService.sendWelcomeEmail(user.email, user.firstName);
-    // } catch (error) {
-    //   console.log('Email sending failed, but registration successful:', error.message);
-    // }
-
-   
     const token = this.generateToken(user.id, user.email, mapPrismaRoleToCustomRole(user.role));
 
     return {
